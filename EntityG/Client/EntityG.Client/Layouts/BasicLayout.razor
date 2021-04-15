@@ -1,0 +1,63 @@
+﻿@namespace EntityG.Client
+@inherits LayoutComponentBase
+@using EntityG.Client.Components
+@using OneOf
+@using System.Security.Claims
+@using System.Text.Json.Serialization
+@using EntityG.Client.Extensions
+@using System.Text.Json;
+@using System.Text.Json.Serialization;
+
+<AuthorizeView>
+    <NotAuthorized>
+        <div class="container__b__0">
+            <div class="lang">
+                <!--todo: selectLang-->
+            </div>
+            <div class="content">
+                <div class="top">
+                    <div class="header">
+                        <a>
+                            <img alt="logo" class="logo" src="assets/logo.svg" />
+                            <span class="title">EntityG Blazor</span>
+                        </a>
+                    </div>
+                    <div class="desc">Ant Design</div>
+                </div>
+                @Body
+            </div>
+        </div>
+    </NotAuthorized>
+
+    <Authorized>
+        <AntDesign.Pro.Layout.BasicLayout Logo="@("/assets/pngegg.png")" MenuData="_menuData">
+            <RightContentRender>
+                <RightContent />
+            </RightContentRender>
+            <ChildContent>
+                @Body
+            </ChildContent>
+        </AntDesign.Pro.Layout.BasicLayout>
+        <SettingDrawer />
+    </Authorized>
+</AuthorizeView>
+
+
+@code
+{
+    private MenuDataItem[] _menuData = { };
+
+    [Inject] public HttpClient HttpClient { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        _menuData = await HttpClient.GetFromJsonAsync<MenuDataItem[]>("data/menu.json");
+    }
+}
+<style>
+    .ant-pro-global-footer{
+        display : none;
+    }
+</style>

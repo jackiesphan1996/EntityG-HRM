@@ -1,0 +1,131 @@
+﻿@page "/assets"
+@namespace EntityG.Client.Pages.Assets
+@using EntityG.Contracts.Responses.Assets;
+@using EntityG.Contracts.Responses.AssetTypes;
+@using EntityG.Contracts.Responses.Shared
+
+
+<div>
+    <PageContainer Title="Assets">
+        <Breadcrumb>
+            <Breadcrumb>
+                <BreadcrumbItem>Home</BreadcrumbItem>
+                <BreadcrumbItem>Assets</BreadcrumbItem>
+            </Breadcrumb>
+        </Breadcrumb>
+        <ChildContent>
+            <div class="standardList">
+                <Card Class="listCard"
+                      Title="Manage Assets"
+                      Style="margin-top: 24px;"
+                      BodyStyle="padding: 0 32px 40px 32px">
+                    <ChildContent>
+                        <Button Type="primary" OnClick="HandleCreate">Create</Button>
+                        <br />
+                        <br />
+                        <Table DataSource="@AssetResponses" TItem="AssetDto"
+                               Loading="@IsLoading"
+                               PageIndex="@Page"
+                               PageSize="@PageSize">
+                            <AntDesign.Column TData="string"
+                                              Title="Name"
+                                              @bind-Field="context.AssetName" />
+                            <AntDesign.Column TData="string"
+                                              Title="Type"
+                                              @bind-Field="context.AssetType" />
+                            <AntDesign.Column TData="string"
+                                              Title="Description"
+                                              @bind-Field="context.Description" />
+                            <AntDesign.Column TData="decimal"
+                                              Title="Price"
+                                              @bind-Field="context.PurchasePrice" />
+                            <AntDesign.Column TData="string" Title="Purchase Date">
+                                @context.PurchaseDate.ToString("dd-MM-yyyy")
+                            </AntDesign.Column>
+                            <AntDesign.Column TData="string"
+                                              Title="Used by"
+                                              @bind-Field="context.UsedBy" />
+                            <AntDesign.Column Title="Active" Field="context.IsActive">
+                                @{var colorActive = !@context.IsActive ? "volcano" : "green";
+
+                                    var textActive = !@context.IsActive ? "No" : "Yes";
+
+                                    <Tag Color="@colorActive">@textActive</Tag> }
+                            </AntDesign.Column>
+                            <AntDesign.Column Title="Action" Field="context.Id">
+                                <Dropdown Placement="@PlacementType.BottomCenter">
+                                    <Overlay>
+                                        <Menu>
+                                            <MenuItem OnClick="(() => Edit(context.Id))">
+                                                Edit
+                                            </MenuItem>
+                                            <MenuItem OnClick="(() => ShowDeleteConfirm(context))">
+                                                Delete
+                                            </MenuItem>
+                                        </Menu>
+                                    </Overlay>
+                                    <ChildContent>
+                                        <Button Type="primary">Actions</Button>
+                                    </ChildContent>
+                                </Dropdown>
+                            </AntDesign.Column>
+                        </Table>
+                        <Modal Title="@AssetDialogTitle"
+                               Visible="@AssetDialogVisible"
+                               OnOk="@HandleAssetDialogOk"
+                               OnCancel="@HandleAssetDialogCancel"
+                               Width="800">
+                            <Form @ref="AssetDialogForm"
+                                  Model="@Asset"
+                                  LabelColSpan="6"
+                                  WrapperColSpan="16">
+                                @{ if (@context.Id != 0)
+                                    {
+                                        <FormItem Label="Asset Id">
+                                            <Input @bind-Value="@context.Id" Disabled />
+                                        </FormItem> } }
+                                <FormItem Label="Asset Name">
+                                    <Input @bind-Value="@context.AssetName" />
+                                </FormItem>
+                                <FormItem Label="Purchase Date">
+                                    <DatePicker @bind-Value="@context.PurchaseDate" TValue="DateTime" Picker="@DatePickerType.Date" />
+                                </FormItem>
+                                <FormItem Label="Purchase Price">
+                                    <Input @bind-Value="@context.PurchasePrice" TValue="Decimal" />
+                                </FormItem>
+                                <FormItem Label="Asset Type">
+                                    <Select DataSource="@AssetTypes"
+                                            @bind-Value="@context.AssetTypeId"
+                                            LabelName="@nameof(AssetTypeDto.Name)"
+                                            ValueName="@nameof(AssetTypeDto.Id)"
+                                            Placeholder="Select an asset type"
+                                            DefaultActiveFirstItem="false"
+                                            EnableSearch>
+                                    </Select>
+                                </FormItem>
+
+                                <FormItem Label="Used By">
+                                    <Select DataSource="@Employees"
+                                            @bind-Value="@context.UsedById"
+                                            LabelName="@nameof(LookupDto.Value)"
+                                            ValueName="@nameof(LookupDto.Id)"
+                                            Placeholder="Select an employee"
+                                            DefaultActiveFirstItem="false"
+                                            EnableSearch>
+                                    </Select>
+                                </FormItem>
+
+                                <FormItem Label="Description">
+                                    <TextArea @bind-Value="@context.Description" />
+                                </FormItem>
+                                <FormItem WrapperColOffset="8" WrapperColSpan="16">
+                                    <Checkbox @bind-Value="context.IsActive">Activate?</Checkbox>
+                                </FormItem>
+                            </Form>
+                        </Modal>
+                    </ChildContent>
+                </Card>
+            </div>
+        </ChildContent>
+    </PageContainer>
+</div>

@@ -1,0 +1,102 @@
+﻿@page "/identity/users"
+
+@using EntityG.Contracts.Responses.Identity
+@namespace EntityG.Client.Pages.Users
+
+<div>
+    <PageContainer Title="Users">
+        <Breadcrumb>
+            <Breadcrumb>
+                <BreadcrumbItem>Home</BreadcrumbItem>
+                <BreadcrumbItem>Identity</BreadcrumbItem>
+                <BreadcrumbItem>Users</BreadcrumbItem>
+            </Breadcrumb>
+        </Breadcrumb>
+        <ChildContent>
+            <div class="standardList">
+                <Card Class="listCard"
+                      Title="Manage Users"
+                      Style="margin-top: 24px;"
+                      BodyStyle="padding: 0 32px 40px 32px">
+                    <Extra>
+                        <div class="extraContent">
+                            <Search Class="extraContentSearch" Placeholder="Search..." @bind-Value="@SearchText" OnSearch="GetUsersAsync" />
+                        </div>
+                    </Extra>
+                    <ChildContent>
+                        @*<Button Type="primary" OnClick="CreateUser">Create</Button>*@
+
+                        <Button Icon="plus" Type="primary" @onclick="_=>open()">New account</Button>
+                        <br />
+                        <br />
+                        <Table DataSource="@UserList" TItem="UserResponse"
+                               Total="@TotalCount"
+                               Loading="@IsLoading"
+                               PageIndex="@Page"
+                               PageSize="@PageSize"
+                               OnPageIndexChange="HandlePageIndexChanged"
+                               OnPageSizeChange="HandlePageSizeChange">
+                            <AntDesign.Column TData="string"
+                                              Title="User name"
+                                              @bind-Field="context.UserName" />
+                            <AntDesign.Column TData="string"
+                                              Title="First Name"
+                                              @bind-Field="context.FirstName" />
+                            <AntDesign.Column TData="string"
+                                              Title="Last Name"
+                                              @bind-Field="context.LastName" />
+                            <AntDesign.Column TData="string"
+                                              Title="Email"
+                                              @bind-Field="context.Email" />
+                            <AntDesign.Column TData="string"
+                                              Title="Phone Number"
+                                              @bind-Field="context.PhoneNumber" />
+                            <AntDesign.Column Title="Email Confirmation" Field="context.EmailConfirmed">
+                                @{var colorEmailConfirmed = !@context.EmailConfirmed ? "volcano" : "green";
+
+                                    var textEmailConfirmed = !@context.EmailConfirmed ? "No" : "Yes";
+
+                                    <Tag Color="@colorEmailConfirmed">@textEmailConfirmed</Tag> }
+                            </AntDesign.Column>
+                            <AntDesign.Column Title="Active" Field="context.IsActive">
+                                @{var colorActive = !@context.IsActive ? "volcano" : "green";
+
+                                    var textActive = !@context.IsActive ? "No" : "Yes";
+
+                                    <Tag Color="@colorActive">@textActive</Tag> }
+                            </AntDesign.Column>
+                            <AntDesign.Column TData="string" Title="Created On">
+                                @context.CreatedOn.ToLocalTime().ToString("dd-MM-yyyy HH:mm:ss")
+                            </AntDesign.Column>
+                            <AntDesign.Column Title="Action" Field="context.Id">
+                                <Dropdown Placement="@PlacementType.BottomCenter">
+                                    <Overlay>
+                                        <Menu>
+                                            <MenuItem OnClick="(() => ViewProfile(context.Id))">
+                                                View profile
+                                            </MenuItem>
+                                            <MenuItem OnClick="(() => ManageRoles(context.Id, context.Email))">
+                                                Manage roles
+                                            </MenuItem>
+                                        </Menu>
+                                    </Overlay>
+                                    <ChildContent>
+                                        <Button Type="primary">Actions</Button>
+                                    </ChildContent>
+                                </Dropdown>
+                            </AntDesign.Column>
+
+
+                        </Table>
+
+                        <Drawer Closable="true" Width="720" Visible="visible" Title='("Create user")' OnClose="_=>close()">
+                            <Template style="height:90%">
+                                <CreateUser  HandleOkay="@HandleReload" />
+                            </Template>
+                        </Drawer>
+                    </ChildContent>
+                </Card>
+            </div>
+        </ChildContent>
+    </PageContainer>
+</div>

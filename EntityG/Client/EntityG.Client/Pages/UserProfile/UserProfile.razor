@@ -1,0 +1,94 @@
+﻿@page "/user-profile/{Id}"
+
+
+<div>
+    <PageContainer Title="Users">
+        <Breadcrumb>
+            <Breadcrumb>
+                <BreadcrumbItem>Home</BreadcrumbItem>
+                <BreadcrumbItem>Identity</BreadcrumbItem>
+                <BreadcrumbItem>Users</BreadcrumbItem>
+                <BreadcrumbItem>User Profile</BreadcrumbItem>
+            </Breadcrumb>
+        </Breadcrumb>
+        <ChildContent>
+            <div class="standardList">
+                <AuthorizeView Roles="Administrator">
+                    <Card Class="listCard"
+                          Title="Administrator Settings."
+                          Style="margin-top: 24px;"
+                          BodyStyle="padding: 0 32px 40px 32px">
+                        This is an Administrator Only View.
+                        <br/>
+                        <Checkbox @bind-Value="@Active">Active?</Checkbox>
+                        <Button Type="@ButtonType.Primary" HtmlType="submit" OnClick="@ToggleUserStatus">
+                            Save
+                        </Button>
+                    </Card>
+                </AuthorizeView>
+                <GridContent>
+                    <Row Gutter="24">
+                        <AntDesign.Col Span="7">
+                            <Card Class="listCard"
+                                  Title="Profile"
+                                  Style="margin-top: 24px "
+                                  BodyStyle="padding: 0 32px 40px 32px">
+                                <ChildContent>
+                                    <div class="avatarHolder">
+                                        <img alt="" src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png"/>
+                                        <div className="name">@_user.FullName </div>
+                                        <div>@_user.Email</div>
+                                    </div>
+
+                                    <div class="detail">
+                                        <p>
+                                            <Icon Type="contacts" Theme="outline" Style="margin-right: 8px;"/>
+                                            Last online :
+                                        </p>
+
+                                    </div>
+                                </ChildContent>
+                            </Card>
+                        </AntDesign.Col>
+                        <AntDesign.Col Span="17">
+                            <Card Class="listCard"
+                                  Title="Public Profile"
+                                  Style="margin-top: 24px;"
+                                  BodyStyle="padding: 0 32px 40px 32px">
+                                <ChildContent>
+                                    <Form Model="@_user"
+                                          Style="margin-top: 8px;"
+                                          LabelCol="new ColLayoutParam {Span = 7}"
+                                          WrapperCol="new ColLayoutParam {Span = 17}">
+                                        <FormItem Label="User Name">
+                                            <Input Placeholder="" @bind-Value="@context.UserName" Disabled/>
+                                        </FormItem>
+                                        <FormItem Label="First Name">
+                                            <Input Placeholder="" @bind-Value="@context.FirstName" Disabled/>
+                                        </FormItem>
+                                        <FormItem Label="Last Name">
+                                            <Input Placeholder="" @bind-Value="@context.LastName" Disabled/>
+                                        </FormItem>
+                                        <FormItem Label="Email">
+                                            <Input Placeholder="" @bind-Value="@context.Email" Disabled/>
+                                        </FormItem>
+                                        <FormItem Label="Phone Number">
+                                            <Input Placeholder="" @bind-Value="@context.PhoneNumber" Disabled/>
+                                        </FormItem>
+                                        <FormItem WrapperColOffset="8" WrapperColSpan="16">
+                                            <Checkbox @bind-Value="context.IsActive" Disabled>Activate User?</Checkbox>
+                                        </FormItem>
+                                        <FormItem WrapperColOffset="8" WrapperColSpan="16">
+                                            <Checkbox @bind-Value="context.EmailConfirmed" Disabled>Auto Confirm Email?</Checkbox>
+                                        </FormItem>
+                                    </Form>
+                                </ChildContent>
+                            </Card>
+                        </AntDesign.Col>
+                    </Row>
+                </GridContent>
+                
+            </div>
+        </ChildContent>
+    </PageContainer>
+</div>

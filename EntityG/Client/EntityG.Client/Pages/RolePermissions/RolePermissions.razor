@@ -1,0 +1,41 @@
+﻿@page "/identity/role-permissions/{Id}"
+@using EntityG.Contracts.Responses.Identity;
+
+<div>
+    <PageContainer Title="Users">
+        <Breadcrumb>
+            <Breadcrumb>
+                <BreadcrumbItem>Home</BreadcrumbItem>
+                <BreadcrumbItem>Identity</BreadcrumbItem>
+                <BreadcrumbItem>User Roles</BreadcrumbItem>
+            </Breadcrumb>
+        </Breadcrumb>
+        <ChildContent>
+            <div class="standardList">
+                <GridContent>
+                    <Row Gutter="24">
+                        <AntDesign.Col Span="24">
+                            <Card Title="@Description">
+                                <Button Type="primary" OnClick="SaveAsync">Update Role Permissions</Button>
+                                <br />
+                                <br />
+
+                                <Table DataSource="@Model.RoleClaims" TItem="RoleClaimsResponse">
+                                    <AntDesign.Column TData="string"
+                                                      Title="Type"
+                                                      @bind-Field="context.Type" />
+                                    <AntDesign.Column TData="string"
+                                                      Title="Permissions"
+                                                      @bind-Field="context.Value" />
+                                    <AntDesign.Column Title="Status" Field="context.Selected">
+                                        <Checkbox @bind-Value="context.Selected" Checked="@context.Selected" />
+                                    </AntDesign.Column>
+                                </Table>
+                            </Card>
+                        </AntDesign.Col>
+                    </Row>
+                </GridContent>
+            </div>
+        </ChildContent>
+    </PageContainer>
+</div>

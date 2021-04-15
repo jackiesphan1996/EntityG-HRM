@@ -1,0 +1,257 @@
+﻿@page "/employee/create"
+@namespace EntityG.Client.Pages.Employees
+@using EntityG.Contracts.Responses
+@using EntityG.Contracts.Responses.Shared
+
+
+<Form @ref="@EmployeeDialogForm"
+      Layout="@FormLayout.Vertical"
+      Model="@_employeeModel"
+      OnFinish="HandleSubmit">
+<PageContainer>
+<Content>Create employee</Content>
+<ChildContent>
+    <Card Title="@("System User Account Info")" Class="card">
+        <Row Gutter="24">
+            <AntDesign.Col Span="24">
+                <FormItem Label="System User Account Info">
+                    @*<AutoComplete Options="@_filteredSystemUsers" >
+                        <AutoCompleteInput Placeholder="input here" @bind-Value="@employeeEmail" OnPressEnter="OnSelectionChange" />
+                    </AutoComplete>*@
+
+
+                    <Select DataSource="@_filteredSystemUsers"
+                            @bind-Value="@context.SystemUserId"
+                            LabelName="@nameof(LookupDto.Value)"
+                            ValueName="@nameof(LookupDto.Id)"
+                            Placeholder="Select a system user"
+                            DefaultActiveFirstItem="false"
+                            OnSearch="OnSelectionChange"
+                            EnableSearch>
+                    </Select>
+                </FormItem>
+            </AntDesign.Col>
+        </Row>
+    </Card>
+
+<Card Title="@("Basic Info")" Class="card">
+    <Row Gutter="24">
+        <AntDesign.Col Span="8">
+            <FormItem Label="First Name">
+                <Input Placeholder="First Name" @bind-Value="@context.FirstName" />
+            </FormItem>
+        </AntDesign.Col>
+        <AntDesign.Col Span="8">
+            <FormItem Label="Last Name">
+                <Input Placeholder="Last Name" @bind-Value="@context.LastName" />
+            </FormItem>
+        </AntDesign.Col>
+        <AntDesign.Col Span="8">
+            <FormItem Label="Gender">
+                <Select TItem="string"
+                        TItemValue="string"
+                        Placeholder="Gender"
+                        @bind-Value="@context.Gender">
+                    <SelectOptions>
+                        <SelectOption TItem="string" TItemValue="string" Value="@("Male")" Label="Male" />
+                        <SelectOption TItem="string" TItemValue="string" Value="@("Female")" Label="Female" />
+                    </SelectOptions>
+                </Select>
+            </FormItem>
+        </AntDesign.Col>
+    </Row>
+    <Row Gutter="24">
+        <AntDesign.Col Span="8">
+            <FormItem Label="Date of Birth">
+                <DatePicker @bind-Value="@context.DateOfBirth" TValue="DateTime" Picker="@DatePickerType.Date" />
+            </FormItem>
+        </AntDesign.Col>
+        <AntDesign.Col Span="16">
+            <FormItem Label="Place of Birth">
+                <Input Placeholder="Place of Birth" @bind-Value="@context.PlaceOfBirth" />
+            </FormItem>
+        </AntDesign.Col>
+    </Row>
+    <Row Gutter="24">
+        <AntDesign.Col Span="8">
+            <FormItem Label="Marital Status">
+                <Select TItem="string"
+                        TItemValue="string"
+                        Placeholder="Marital Status"
+                        @bind-Value="@context.MaritalStatus">
+                    <SelectOptions>
+                        <SelectOption TItem="string" TItemValue="string" Value="@("Single")" Label="Single" />
+                        <SelectOption TItem="string" TItemValue="string" Value="@("Married")" Label="Married" />
+                        <SelectOption TItem="string" TItemValue="string" Value="@("Remarried")" Label="Remarried" />
+                        <SelectOption TItem="string" TItemValue="string" Value="@("Separated")" Label="Separated" />
+                        <SelectOption TItem="string" TItemValue="string" Value="@("Divorced")" Label="Divorced" />
+                        <SelectOption TItem="string" TItemValue="string" Value="@("Widowed")" Label="Widowed" />
+                    </SelectOptions>
+                </Select>
+            </FormItem>
+
+        </AntDesign.Col>
+        <AntDesign.Col Span="8">
+            <FormItem Label="Email">
+                <Input Placeholder="Email" @bind-Value="@context.Email" />
+            </FormItem>
+        </AntDesign.Col>
+        <AntDesign.Col Span="8">
+            <FormItem Label="Phone">
+                <Input Placeholder="Phone" @bind-Value="@context.Phone" />
+            </FormItem>
+        </AntDesign.Col>
+    </Row>
+    <Row Gutter="24">
+        <AntDesign.Col Span="24">
+            <FormItem Label="Street Address1">
+                <Input Placeholder="Street Address1" @bind-Value="@context.Address1" />
+            </FormItem>
+        </AntDesign.Col>
+    </Row>
+    <Row Gutter="24">
+        <AntDesign.Col Span="24">
+            <FormItem Label="Street Address2">
+                <Input Placeholder="Street Address2" @bind-Value="@context.Address2" />
+            </FormItem>
+        </AntDesign.Col>
+    </Row>
+    <Row Gutter="24">
+        <AntDesign.Col Span="8">
+            <FormItem Label="City">
+                <Input Placeholder="City" @bind-Value="@context.City" />
+            </FormItem>
+        </AntDesign.Col>
+        <AntDesign.Col Span="8">
+            <FormItem Label="State / Province">
+                <Input Placeholder="State / Province" @bind-Value="@context.StateProvince" />
+            </FormItem>
+        </AntDesign.Col>
+        <AntDesign.Col Span="8">
+            <FormItem Label="ZipCode / Postal Code">
+                <Input Placeholder="ZipCode / Postal Code" @bind-Value="@context.ZipCode" />
+            </FormItem>
+        </AntDesign.Col>
+    </Row>
+    <Row Gutter="24">
+        <AntDesign.Col Span="24">
+            <FormItem Label="Country">
+                <Input Placeholder="Country" @bind-Value="@context.Country" />
+            </FormItem>
+        </AntDesign.Col>
+    </Row>
+</Card>
+<Card Title="@("Staff Info")" Class="card">
+    <Row Gutter="24">
+        <AntDesign.Col Span="24">
+            <FormItem Label="Employee Code">
+                <Input Placeholder="Employee Code" @bind-Value="@context.EmployeeIdNumber" />
+            </FormItem>
+        </AntDesign.Col>
+    </Row>
+    <Row Gutter="24">
+        <AntDesign.Col Span="12">
+            <FormItem Label="Department">
+                <Select DataSource="@_allDepartments"
+                        @bind-Value="@context.DepartmentId"
+                        LabelName="@nameof(LookupDto.Value)"
+                        ValueName="@nameof(LookupDto.Id)"
+                        Placeholder="Select a department"
+                        DefaultActiveFirstItem="false"
+                        EnableSearch>
+                </Select>
+            </FormItem>
+        </AntDesign.Col>
+        <AntDesign.Col Span="12">
+            <FormItem Label="Supervisor">
+                <Select DataSource="@_allEmployees"
+                        @bind-Value="@context.SupervisorId"
+                        LabelName="@nameof(LookupDto.Value)"
+                        ValueName="@nameof(LookupDto.Id)"
+                        Placeholder="Select a supervisor"
+                        DefaultActiveFirstItem="false"
+                        EnableSearch>
+                </Select>
+            </FormItem>
+        </AntDesign.Col>
+    </Row>
+    <Row Gutter="24">
+        <AntDesign.Col Span="12">
+            <FormItem Label="Joining Date">
+                <DatePicker @bind-Value="@context.JoiningDate" TValue="DateTime" Picker="@DatePickerType.Date" />
+            </FormItem>
+        </AntDesign.Col>
+        <AntDesign.Col Span="12">
+            <FormItem Label="Leaving Date">
+                <DatePicker @bind-Value="@context.LeavingDate" TValue="DateTime?" Picker="@DatePickerType.Date" />
+            </FormItem>
+        </AntDesign.Col>
+    </Row>
+</Card>
+<Card Title="@("Salary Info")" Class="card">
+    <Row Gutter="24">
+        <AntDesign.Col Span="24">
+            <FormItem Label="Basic Salary">
+                <Input Placeholder="Basic Salary" TValue="Decimal" @bind-Value="@context.BasicSalary" />
+            </FormItem>
+        </AntDesign.Col>
+    </Row>
+    <Row Gutter="24">
+        <AntDesign.Col Span="24">
+            <FormItem Label="Un Paid Leave Per Day">
+                <Input Placeholder="Un Paid Leave Per Day" TValue="Decimal" @bind-Value="@context.UnpaidLeavePerDay" />
+            </FormItem>
+        </AntDesign.Col>
+    </Row>
+</Card>
+<Card Title="@("Bank Account Info")" Class="card">
+    <Row Gutter="24">
+        <AntDesign.Col Span="24">
+            <FormItem Label="Account Title">
+                <Input Placeholder="Account Title" TValue="string" @bind-Value="@context.AccountTitle" />
+            </FormItem>
+        </AntDesign.Col>
+    </Row>
+    <Row Gutter="24">
+        <AntDesign.Col Span="24">
+            <FormItem Label="Bank Name">
+                <Input Placeholder="Bank Name" TValue="string" @bind-Value="@context.BankName" />
+            </FormItem>
+        </AntDesign.Col>
+    </Row>
+    <Row Gutter="24">
+        <AntDesign.Col Span="24">
+            <FormItem Label="Account Number">
+                <Input Placeholder="Account Number" TValue="string" @bind-Value="@context.AccountNumber" />
+            </FormItem>
+        </AntDesign.Col>
+    </Row>
+</Card>
+
+</ChildContent>
+</PageContainer>
+<div class="ant-page-header navbar">
+    <FormItem >
+        <Button Type="primary" HtmlType="submit"  Style="margin-top:20px">
+            Submit
+        </Button>
+        <Button Style="margin-left:8px" OnClick="Close">
+            Cancel
+        </Button>
+    </FormItem>
+</div>
+</Form>
+<style>
+    .navbar {
+        overflow: hidden;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        margin-left:-24px
+    }
+
+    .ant-pro-global-footer {
+        padding: 0 16px;
+        text-align: center;
+    }
+</style>

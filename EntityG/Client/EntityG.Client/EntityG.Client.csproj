@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net5</TargetFramework>
+    <RazorLangVersion>3.0</RazorLangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AntDesign" Version="0.6.0-*" />
+    <PackageReference Include="AntDesign.Charts" Version="0.2.0-*" />
+    <PackageReference Include="AntDesign.Pro.Layout" Version="0.1.0-nightly-210129055145" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.Http">
+      <HintPath>C:\Program Files\dotnet\packs\Microsoft.AspNetCore.App.Ref\5.0.0\ref\net5.0\Microsoft.Extensions.Http.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Pages\Departments\Users - Copy - Copy.razor.less">
+      <DependentUpon>Departments.razor.less</DependentUpon>
+    </None>
+    <None Update="Pages\Departments\Users - Copy.razor.less">
+      <DependentUpon>Departments.razor.less</DependentUpon>
+    </None>
+    <None Update="Pages\Employees\CreateEmployee - Copy.razor.less">
+      <DependentUpon>CreateEmployee.razor.less</DependentUpon>
+    </None>
+    <None Update="Pages\Employees\Users - Copy - Copy.razor.less">
+      <DependentUpon>Employees.razor.less</DependentUpon>
+    </None>
+    <None Update="Pages\Employees\Users - Copy.razor.less">
+      <DependentUpon>Employees.razor.less</DependentUpon>
+    </None>
+    <None Update="Pages\Roles\Users - Copy.razor.less">
+      <DependentUpon>Roles.razor.less</DependentUpon>
+    </None>
+    <None Update="Pages\UserProfile\Users - Copy.razor.less">
+      <DependentUpon>UserProfile.razor.less</DependentUpon>
+    </None>
+    <None Update="Pages\Users\Users - Copy - Copy.razor.less">
+      <DependentUpon>Users.razor.less</DependentUpon>
+    </None>
+    <None Update="Pages\Users\Users - Copy.razor.less">
+      <DependentUpon>Users.razor.less</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\SelfServices\Payrolls\" />
+    <Folder Include="Pages\SelfServices\Payrolls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\EntityG.Client.Infrastructure\EntityG.Client.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\EntityG.Contracts\EntityG.Contracts.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(SolutionDir)'==''">
+    <SolutionDir>./</SolutionDir>
+  </PropertyGroup>
+</Project>

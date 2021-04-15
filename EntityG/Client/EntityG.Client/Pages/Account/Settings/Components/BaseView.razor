@@ -1,0 +1,43 @@
+﻿@namespace EntityG.Client.Pages.Account.Settings
+
+<div class="baseView">
+    <div class="left" style="min-width: 310px;">
+        <Form 
+            Layout="vertical"
+            OnFinish="UpdateProfileAsync"
+            Model="@_profileModel">
+            <FormItem Label="Email">
+                <AntDesign.Input @bind-Value="@context.Email" />
+            </FormItem>
+            <FormItem Label="First Name">
+                <AntDesign.Input @bind-Value="@context.FirstName" />
+            </FormItem>
+            <FormItem Label="Last Name">
+                <AntDesign.Input @bind-Value="@context.LastName" />
+            </FormItem>
+            <FormItem Label="Phone Number">
+                <AntDesign.Input @bind-Value="@context.PhoneNumber" />
+            </FormItem>
+            <FormItem>
+                <Button HtmlType="submit" Type="primary">
+                    Update Information
+                </Button>
+            </FormItem>
+        </Form>
+    </div>
+    <div class="right__b__1">
+        <div class="avatar_title">
+            Avatar
+        </div>
+        <div class="avatar">
+            <img src="@ImageDataUrl" alt="avatar" />
+        </div>
+        <Upload ShowUploadList="false">
+            <div class="button_view">
+                <Button Icon="upload">
+                    Change avatar
+                </Button>
+            </div>
+        </Upload>
+    </div>
+</div>

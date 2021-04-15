@@ -1,0 +1,81 @@
+﻿@page "/asset-types"
+@namespace EntityG.Client.Pages.AssetTypes
+@using EntityG.Contracts.Responses.AssetTypes;
+
+<div>
+    <PageContainer Title="Asset Types">
+        <Breadcrumb>
+            <Breadcrumb>
+                <BreadcrumbItem>Home</BreadcrumbItem>
+                <BreadcrumbItem>Asset Types</BreadcrumbItem>
+            </Breadcrumb>
+        </Breadcrumb>
+        <ChildContent>
+            <div class="standardList">
+                <Card Class="listCard"
+                      Title="Manage Asset Types"
+                      Style="margin-top: 24px;"
+                      BodyStyle="padding: 0 32px 40px 32px">
+                    <ChildContent>
+                        <Button Type="primary" OnClick="HandleCreate">Create</Button>
+                        <br />
+                        <br />
+                        <Table DataSource="@AssetTypeResponses" TItem="AssetTypeDto"
+                               Loading="@IsLoading"
+                               PageIndex="@Page"
+                               PageSize="@PageSize">
+                            <AntDesign.Column TData="string"
+                                              Title="Name"
+                                              @bind-Field="context.Name" />
+                            <AntDesign.Column TData="string"
+                                              Title="Description"
+                                              @bind-Field="context.Description" />
+                            <AntDesign.Column TData="string" Title="Created On">
+                                @context.CreatedOn.ToLocalTime().ToString("dd-MM-yyyy HH:mm:ss")
+                            </AntDesign.Column>
+
+                            <AntDesign.Column Title="Action" Field="context.Id">
+                                <Dropdown Placement="@PlacementType.BottomCenter">
+                                    <Overlay>
+                                        <Menu>
+                                            <MenuItem OnClick="(() => Edit(context.Id))">
+                                                Edit
+                                            </MenuItem>
+                                            <MenuItem OnClick="(() => ShowDeleteConfirm(context))">
+                                                Delete
+                                            </MenuItem>
+                                        </Menu>
+                                    </Overlay>
+                                    <ChildContent>
+                                        <Button Type="primary">Actions</Button>
+                                    </ChildContent>
+                                </Dropdown>
+                            </AntDesign.Column>
+                        </Table>
+                        <Modal Title="@AssetTypeDialogTitle"
+                               Visible="@AssetTypeDialogVisible"
+                               OnOk="@HandleAssetTypeDialogOk"
+                               OnCancel="@HandleAssetTypeDialogCancel">
+                            <Form @ref="AssetTypeDialogForm"
+                                  Model="@AssetType"
+                                  LabelColSpan="8"
+                                  WrapperColSpan="16">
+                                @{ if (@context.Id != 0)
+                                                                {
+                                    <FormItem Label="Asset Id">
+                                        <Input @bind-Value="@context.Id" Disabled />
+                                    </FormItem> } }
+                                <FormItem Label="Name">
+                                    <Input @bind-Value="@context.Name" />
+                                </FormItem>
+                                <FormItem Label="Description">
+                                    <Input @bind-Value="@context.Description" />
+                                </FormItem>
+                            </Form>
+                        </Modal>
+                    </ChildContent>
+                </Card>
+            </div>
+        </ChildContent>
+    </PageContainer>
+</div>

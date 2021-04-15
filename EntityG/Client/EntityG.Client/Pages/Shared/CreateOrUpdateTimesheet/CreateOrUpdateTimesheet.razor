@@ -1,0 +1,68 @@
+﻿@using EntityG.EntityFramework.Entities
+@using EntityG.Contracts.Responses
+@using EntityG.Contracts.Responses.Shared
+@inject NotificationService _notice
+
+<Modal Title="@Title"
+       Visible="@Visiable"
+       OnOk="@HandleOk"
+       Width="800"
+       OnCancel="@HandleCloseDiaglog">
+    <Form Model="@Timesheet"
+          LabelCol="new ColLayoutParam { Span = 3 }">
+        <FormItem Label="Date">
+            <DatePicker TValue="DateTime" @bind-Value="@context.Date" DefaultValue="@DateTime.Now.Date" Format="yyyy/MM/dd" />
+        </FormItem>
+        <FormItem Label="Hour rate">
+            <Select TItem="HourRate"
+                    TItemValue="HourRate"
+                    Placeholder="HourRate"
+                    @bind-Value="@context.HourRate">
+                <SelectOptions>
+                    <SelectOption TItem="HourRate" TItemValue="HourRate" Value="@(HourRate.NormalWorkingDays)" Label=" 1x - Normal working days" />
+                    <SelectOption TItem="HourRate" TItemValue="HourRate" Value="@(HourRate.OverTimeInWorkingDays)" Label=" 1.5x - Overtime in working days" />
+                    <SelectOption TItem="HourRate" TItemValue="HourRate" Value="@(HourRate.WorkAtWeekends)" Label=" 2x - Work at weekends " />
+                </SelectOptions>
+            </Select>
+        </FormItem>
+        <FormItem Label="Hours">
+            <AntDesign.InputNumber Min="1" Max="10" DefaultValue="8" @bind-Value="@context.Hours" />
+        </FormItem>
+        <FormItem Label="Activity">
+            <Select TItem="Activity"
+                    TItemValue="Activity"
+                    Placeholder="Activity"
+                    @bind-Value="@context.Activity">
+                <SelectOptions>
+                    <SelectOption TItem="Activity" TItemValue="Activity" Value="@(Activity.Code)" Label="Code" />
+                    <SelectOption TItem="Activity" TItemValue="Activity" Value="@(Activity.Meeting)" Label="Meeting" />
+                </SelectOptions>
+            </Select>
+        </FormItem>
+
+        <FormItem Label="Project">
+            <Select @bind-Value="@Timesheet.ProjectId"
+                    DataSource="@_projects"
+                    LabelName="@nameof(LookupDto.Value)"
+                    ValueName="@nameof(LookupDto.Id)"
+                    Placeholder="Activity"
+                    DefaultActiveFirstItem="true"
+                    EnableSearch
+                    @bind-Value="@context.ProjectId" />
+        </FormItem>
+        <FormItem Label="Comment">
+            <TextArea Placeholder="Comment" AllowClear="true" @bind-Value="@context.Comment" />
+        </FormItem>
+        @if (Timesheet.Id > 0)
+        {
+            <FormItem Label="Remove">
+                <Button Type="primary" Danger OnClick="() => OnRemove(Timesheet.Id)">
+                    Remove
+                </Button>
+            </FormItem>
+
+        }
+
+
+    </Form>
+</Modal>

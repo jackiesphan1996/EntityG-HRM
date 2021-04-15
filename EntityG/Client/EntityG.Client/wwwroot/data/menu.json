@@ -1,0 +1,122 @@
+[
+  {
+    "path": "/dashboard",
+    "name": "Dashboard",
+    "key": "dashboard",
+    "icon": "dashboard",
+    "authority": [ "Administrator" ],
+    "children": [
+      {
+        "path": "/",
+        "name": "Workplace",
+        "key": "dashboard.workplace",
+        "authority": [ "Administrator" ]
+      }
+    ]
+  },
+  {
+    "path": "/self-service",
+    "name": "Self Service",
+    "key": "self-service",
+    "authority": [ "Administrator" ],
+    "icon": "user",
+    "children": [
+      {
+        "path": "/self-service/timesheet",
+        "name": "Timesheets",
+        "key": "self-service.timesheet",
+        "authority": [ "Administrator" ]
+      },
+      {
+        "path": "/self-service/leaves",
+        "name": "Leaves",
+        "key": "self-service.leaves",
+        "authority": [ "Administrator" ],
+        "children": [
+          {
+            "path": "/self-service/leaves",
+            "name": "Leave Requests",
+            "key": "self-service.leave-request",
+            "authority": [ "Administrator" ]
+          },
+          {
+            "path": "/self-service/leave/create",
+            "name": "Create Leave Request",
+            "key": "self-service.leaves.create",
+            "authority": [ "Administrator" ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/identity",
+    "name": "Identity",
+    "key": "identity",
+    "authority": [ "Administrator" ],
+    "icon": "user",
+    "children": [
+      {
+        "path": "/identity/users",
+        "name": "Users",
+        "key": "identity.user",
+        "authority": [ "Administrator" ]
+      },
+      {
+        "path": "/identity/roles",
+        "name": "Roles",
+        "key": "identity.role",
+        "authority": [ "Administrator" ]
+      }
+    ]
+  },
+  {
+    "path": "/assets",
+    "name": "Assets",
+    "key": "asset",
+    "authority": [ "Administrator" ],
+    "icon": "user",
+    "children": [
+      {
+        "path": "/asset-types",
+        "name": "Asset Types",
+        "key": "asset.asset-types",
+        "authority": [ "Administrator" ]
+      },
+      {
+        "path": "/assets",
+        "name": "Assets",
+        "key": "asset.assets",
+        "authority": [ "Administrator" ]
+      }
+    ]
+  },
+  {
+    "path": "/employees",
+    "name": "Employees",
+    "key": "employee",
+    "authority": [ "Administrator" ],
+    "icon": "user",
+    "children": [
+      {
+        "path": "/employees",
+        "name": "Employees",
+        "key": "employee.employees",
+        "authority": [ "Administrator" ]
+      },
+      {
+        "path": "/departments",
+        "name": "Departments",
+        "key": "employee.departments",
+        "authority": [ "Administrator" ]
+      }
+    ]
+  },
+  {
+    "path": "/projects",
+    "name": "Projects",
+    "key": "project",
+    "icon": "project",
+    "authority": [ "Administrator" ]
+  }
+]

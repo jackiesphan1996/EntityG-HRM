@@ -1,0 +1,34 @@
+﻿@namespace EntityG.Client.Pages.User
+@layout UserLayout
+@page "/user/login"
+
+
+<div class="main__b__0">
+    <div class="login">
+        <Form Model="@_model" OnFinish="HandleSubmit">
+            <Tabs ActiveKey="@context.LoginType">
+                <TabPane Key="1">
+                    <Tab></Tab>
+                    <ChildContent>
+                        <FormItem>
+                            <AntDesign.Input Placeholder="Email" Size="large" @bind-Value="@context.UserName">
+                                <Prefix><Icon Type="user" /></Prefix>
+                            </AntDesign.Input>
+                        </FormItem>
+                        <FormItem>
+                            <AntDesign.Input Placeholder="Password" Size="large" @bind-Value="@context.Password" Type="password">
+                                <Prefix><Icon Type="lock" /></Prefix>
+                            </AntDesign.Input>
+                        </FormItem>
+                    </ChildContent>
+                </TabPane>
+            </Tabs>
+            <div>
+                <Checkbox Checked="@context.AutoLogin">
+                    Remember me?
+                </Checkbox>
+            </div>
+            <Button Type="primary" HtmlType="submit" Class="submit" Size="large" Block>Login</Button>
+        </Form>
+    </div>
+</div>

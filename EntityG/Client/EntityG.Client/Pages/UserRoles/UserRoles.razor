@@ -1,0 +1,58 @@
+﻿@page "/identity/user-roles/{Id}"
+@using EntityG.Contracts.Responses.Identity;
+
+<div>
+    <PageContainer Title="Users">
+        <Breadcrumb>
+            <Breadcrumb>
+                <BreadcrumbItem>Home</BreadcrumbItem>
+                <BreadcrumbItem>Identity</BreadcrumbItem>
+                <BreadcrumbItem>User Roles</BreadcrumbItem>
+            </Breadcrumb>
+        </Breadcrumb>
+        <ChildContent>
+            <div class="standardList">
+                <GridContent>
+                    <Row Gutter="24">
+                        <AntDesign.Col Span="7">
+                            <Card Style="margin-bottom: 24px;">
+                                <div class="avatarHolder">
+                                    <img alt="" src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png" />
+                                    <div className="name">@CurrentUser.LastName @CurrentUser.FirstName</div>
+                                    <div>@CurrentUser.Email</div>
+                                </div>
+
+                                <div class="detail">
+                                    <p>
+                                        <Icon Type="contacts" Theme="outline" Style="margin-right: 8px;" />
+                                        @CurrentUser.UserName
+                                    </p>
+                                    <p>
+                                        <Icon Type="phone" Theme="outline" Style="margin-right: 8px;" />
+                                        @CurrentUser.PhoneNumber
+                                    </p>
+                                </div>
+                            </Card>
+                        </AntDesign.Col>
+                        <AntDesign.Col Span="17">
+                            <Card>
+                                <Button Type="primary" OnClick="SaveAsync">Update user roles</Button>
+                                <br />
+                                <br />
+
+                                <Table DataSource="@UserRolesList" TItem="UserRoleModel">
+                                    <AntDesign.Column TData="string"
+                                                      Title="Role Name"
+                                                      @bind-Field="context.RoleName" />
+                                    <AntDesign.Column Title="Status" Field="context.Selected">
+                                        <Checkbox @bind-Value="context.Selected" Checked="@context.Selected" />
+                                    </AntDesign.Column>
+                                </Table>
+                            </Card>
+                        </AntDesign.Col>
+                    </Row>
+                </GridContent>
+            </div>
+        </ChildContent>
+    </PageContainer>
+</div>

@@ -1,0 +1,34 @@
+{
+  "name": "Steven Phan",
+  "avatar": "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
+  "userid": "00000001",
+  "email": "hoang.nhat.phan@entityg.com",
+  "signature": "Inclusive of all rivers, tolerance is great",
+  "title": "Interaction Expert",
+  "group": "Ant Financial Services-XX Business Group-XX Platform Department-XX Technical Department-UED",
+  "tags": [
+    {
+      "key": "0",
+      "label": "very thoughtful"
+    },
+    {
+      "key": "1",
+      "label": "focus on design"
+    }
+  ],
+  "notifyCount": 12,
+  "unreadCount": 11,
+  "country": "Vietnam",
+  "geographic ": {
+    "province": {
+      "label": "405 Truong Chinh",
+      "key": "330000"
+    },
+    "city": {
+      "label": "Tan Binh District",
+      "key": "330100"
+    }
+  },
+  "address": "405 Truong Chinh, Tan Binh District",
+  "phone": "0752-268888888"
+}

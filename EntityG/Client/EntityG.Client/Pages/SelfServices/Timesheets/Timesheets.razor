@@ -1,0 +1,106 @@
+﻿@page "/self-service/timesheet"
+@using EntityG.Client.Pages.Shared.CreateOrUpdateTimesheet
+@using EntityG.Client.Infrastructure.ViewModels
+@using EntityG.EntityFramework.Entities
+@using EntityG.Contracts.Responses
+@namespace EntityG.Client.Pages.SelfServices.Timesheets
+
+<PageContainer Title="Timesheet">
+    <Breadcrumb>
+        <Breadcrumb>
+            <BreadcrumbItem>Dashboard</BreadcrumbItem>
+
+        </Breadcrumb>
+    </Breadcrumb>
+    <ChildContent>
+        <Card>
+            <div>
+                <DatePicker OnChange="OnDatePickerSelectedChange" TValue="DateTime?" Picker="@DatePickerType.Month" />
+            </div>
+        </Card>
+        <Card>
+           
+            <AntDesign.Calendar Value="filterDate" DateCellRender="DateCellRender" DefaultValue="filterDate" OnPanelChange="OnChange" OnSelect="OnSelect" />
+            <CreateOrUpdateTimesheet Timesheet="@Timesheet" Visiable="@ShowDialog" Title="@Title" HandleRemove="@HandleReload"  HandleOkay="@HandleReload" HandleCancel="@HandleCloseDialog" />
+        </Card>
+    </ChildContent>
+</PageContainer>
+
+@code
+
+{
+    private RenderFragment DateCellRender(DateTime value)
+    {
+        var listData =  GetListData(value);
+
+        bool isValid = listData.Where(x => x.HourRate == HourRate.NormalWorkingDays).Count() < 2;
+
+        var color = "";
+        if (!isValid)
+        {
+            color = "background-color: red";
+        }
+
+        return
+    @<Template Style="@color">
+        <ul class="events">
+            @foreach (var data in listData)
+            {
+<li key="@data.Id">
+    <Tag Color="blue" OnClick="() => OnClick(data.Id)">
+        @data.Hours - @data.Activity - @data.ProjectName
+    </Tag>
+</li>
+           }
+        </ul>
+    </Template>;
+}
+
+
+
+private RenderFragment MonthCellRender(DateTime value)
+{
+int? num = GetMonthData(value);
+
+if (num == null)
+{
+ return null;
+}
+
+return @<Template>
+    <div className="notes-month">
+        <section>@num</section>
+        <span>Backlog number</span>
+    </div>
+</Template>;
+}
+}
+
+<style>
+    .events {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        .events .ant-badge-status {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            text-overflow: ellipsis;
+            font-size: 12px;
+        }
+
+    .notes-month {
+        text-align: center;
+        font-size: 28px;
+    }
+
+        .notes-month section {
+            font-size: 28px;
+        }
+
+    .ant-picker-calendar-header {
+        display: none;
+    }
+</style>

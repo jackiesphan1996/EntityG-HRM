@@ -1,0 +1,106 @@
+﻿@page "/projects"
+@namespace EntityG.Client.Pages.Projects
+@using EntityG.Contracts.Responses.Employees
+@using EntityG.Contracts.Responses.Projects 
+
+<div>
+    <PageContainer Title="Employees">
+        <Breadcrumb>
+            <Breadcrumb>
+                <BreadcrumbItem>Home</BreadcrumbItem>
+                <BreadcrumbItem>Projects</BreadcrumbItem>
+            </Breadcrumb>
+        </Breadcrumb>
+        <ChildContent>
+            <div class="standardList">
+                <Card Class="listCard"
+                      Title="Manage Projects"
+                      Style="margin-top: 24px;"
+                      BodyStyle="padding: 0 32px 40px 32px">
+                    <Extra>
+                        <div class="extraContent">
+                            <Search Class="extraContentSearch" Placeholder="Search..." @bind-Value="@SearchText" OnSearch="GetAllProjectsWithPaging" />
+                        </div>
+                    </Extra>
+                    <ChildContent>
+                        <Button Type="primary" OnClick="CreateProject">Create</Button>
+                        <br />
+                        <br />
+                        <Table DataSource="@_projects" TItem="ProjectDto"
+                               Total="@TotalCount"
+                               Loading="@IsLoading"
+                               PageIndex="@Page"
+                               PageSize="@PageSize"
+                               OnPageIndexChange="HandlePageIndexChanged"
+                               OnPageSizeChange="HandlePageSizeChange"
+                               RowExpandable="@((record)=> record.Data.Employees != null && record.Data.Employees.Any())">
+                            <RowTemplate>
+                                <AntDesign.Column TData="string"
+                                                  Title="Name"
+                                                  @bind-Field="context.Name" />
+                                <AntDesign.Column TData="string"
+                                                  Title="Description"
+                                                  @bind-Field="context.Description" />
+
+                                <AntDesign.Column TData="string" Title="Created On">
+                                    @context.CreatedOn.ToLocalTime().ToString("dd-MM-yyyy HH:mm:ss")
+                                </AntDesign.Column>
+                                <AntDesign.Column Title="Action" Field="context.Id">
+                                    <Dropdown Placement="@PlacementType.BottomCenter">
+                                        <Overlay>
+                                            <Menu>
+                                                @*<MenuItem OnClick="(() => Edit(context.Id))">
+                            Edit
+                        </MenuItem>
+                        <MenuItem OnClick="(() => ShowDeleteConfirm(context))">
+                            Delete
+                        </MenuItem>*@
+                                            </Menu>
+                                        </Overlay>
+                                        <ChildContent>
+                                            <Button Type="primary">Actions</Button>
+                                        </ChildContent>
+                                    </Dropdown>
+                                </AntDesign.Column>
+                            </RowTemplate>
+                            <ExpandTemplate>
+                                <Card Class="listCard"
+                                      Title="Members"
+                                      >
+                                    <Table Context="employee" DataSource="@context.Data.Employees" TItem="ProjectEmployeeDto">
+                                        <AntDesign.Column TData="string"
+                                                          Title="Employee Code"
+                                                          DataIndex="@nameof(employee.EmployeeIdNumber)"/>
+                                        <AntDesign.Column TData="DateTime" Title="Joining Date" DataIndex="@nameof(employee.JoiningDate)">
+                                        </AntDesign.Column>
+                                    </Table>
+                                </Card>
+                            </ExpandTemplate>
+                        </Table>
+                        @*<Modal Title="@ProjectDialogTitle"
+                               Visible="@ProjectDialogVisible"
+                               OnOk="@HandleProjectDialogOk"
+                               OnCancel="@HandleProjectDialogCancel">
+                            <Form @ref="ProjectDialogForm"
+                                   Model="@_project"
+                                   LabelColSpan="8"
+                                   WrapperColSpan="16">
+                                @{ if (@context.Id != 0)
+                                   {
+                                       <FormItem Label="Project Id">
+                                           <Input @bind-Value="@context.Id" Disabled />
+                                       </FormItem> } }
+                                <FormItem Label="Name">
+                                    <Input @bind-Value="@context.Name" />
+                                </FormItem>
+                                <FormItem Label="Description">
+                                    <Input @bind-Value="@context.Description" />
+                                </FormItem>
+                            </Form>
+                        </Modal>*@
+                    </ChildContent>
+                </Card>
+            </div>
+        </ChildContent>
+    </PageContainer>
+</div>

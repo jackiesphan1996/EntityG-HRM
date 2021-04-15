@@ -1,0 +1,49 @@
+﻿@namespace EntityG.Client.Components
+@inherits AntDomComponentBase
+
+<Space Class="@ClassMapper.Class">
+    <SpaceItem>
+        <HeaderSearch Class="action search"
+                      Placeholder="Site Search"
+                      DefaultValue="umi ui"
+                      Options="DefaultOptions" />
+    </SpaceItem>
+    <SpaceItem>
+        <Tooltip Title="@("Help")" Placement="@PlacementType.Bottom">
+            <span class="action">
+                <Icon Type="question-circle" Theme="outline" />
+            </span>
+        </Tooltip>
+    </SpaceItem>
+    <SpaceItem>
+        <NoticeIcon ClearText="Empty"
+                    ViewMoreText="see more"
+                    Count="_count"
+                    OnClear="HandleClear"
+                    OnViewMore="HandleViewMore">
+            <NoticeList TabKey="notification"
+                        Title="Notice"
+                        EmptyText="You have viewed all notifications"
+                        ShowViewMore
+                        Data="_notifications"/>
+            <NoticeList TabKey="message"
+                        Title="News"
+                        EmptyText="You have read all the messages"
+                        ShowViewMore
+                        Data="_messages"/>
+            <NoticeList TabKey="event"
+                        Title="Upcoming"
+                        EmptyText="You have completed all to do"
+                        ShowViewMore
+                        Data="_events"/>
+        </NoticeIcon>
+    </SpaceItem>
+    <SpaceItem>
+        <AvatarDropdown Name="@_currentUser.Name"
+                        Avatar="@_currentUser.Avatar"
+                        OnItemSelected="HandleSelectUser" />
+    </SpaceItem>
+    <SpaceItem>
+        <SelectLang OnItemSelected="HandleSelectLang" />
+    </SpaceItem>
+</Space>

@@ -1,0 +1,94 @@
+﻿@page "/self-service/leaves"
+@using EntityG.Contracts.Responses
+@namespace EntityG.Client.Pages.SelfServices.Leaves
+@using EntityG.Contracts.Responses.Leaves
+
+<PageContainer Title="Timesheet">
+    <Breadcrumb>
+        <Breadcrumb>
+            <BreadcrumbItem>Dashboard</BreadcrumbItem>
+            <BreadcrumbItem>Self Service</BreadcrumbItem>
+            <BreadcrumbItem>Leaves</BreadcrumbItem>
+        </Breadcrumb>
+    </Breadcrumb>
+    <ChildContent>
+        <div class="standardList">
+            <Card Class="listCard"
+                  Title="Leave Requests"
+                  Style="margin-top: 24px;"
+                  BodyStyle="padding: 0 32px 40px 32px">
+                <Extra>
+                    <div class="extraContent">
+                        @*<Search Class="extraContentSearch" Placeholder="Search..." @bind-Value="@SearchText" OnSearch="GetAllEmployeesWithPaging" />*@
+                    </div>
+                </Extra>
+                <ChildContent>
+                    <Button Type="primary" OnClick="CreateLeaveRequest">Create Leave Request</Button>
+                    <br />
+                    <br />
+                    <Table DataSource="@_leaves" TItem="LeaveDto"
+                           Total="@TotalCount"
+                           Loading="@IsLoading"
+                           PageIndex="@Page"
+                           PageSize="@PageSize"
+                           OnPageIndexChange="HandlePageIndexChanged"
+                           OnPageSizeChange="HandlePageSizeChange">
+                        <AntDesign.Column TData="string"
+                                          Title="Emp Name"
+                                          @bind-Field="context.EmployeeName" />
+                        <AntDesign.Column TData="string"
+                                          Title="Emp ID Number"
+                                          @bind-Field="context.EmployeeIdNumber" />
+                        <AntDesign.Column TData="DateTime"
+                                          Title="First Name"
+                                          @bind-Field="context.FromDate" />
+                        <AntDesign.Column TData="DateTime"
+                                          Title="End Date"
+                                          @bind-Field="context.ToDate" />
+                        <AntDesign.Column TData="double"
+                                          Title="Total Days">
+                            @Math.Floor(context.ToDate.Subtract(context.FromDate).TotalDays)
+                        </AntDesign.Column>
+                        <AntDesign.Column TData="string"
+                                          Title="Leave Type"
+                                          @bind-Field="context.LeaveType" />
+                        <AntDesign.Column TData="string"
+                                          Title="Reason"
+                                          @bind-Field="context.Reason" />
+                        <AntDesign.Column TData="string"
+                                          Title="Emergency Contact"
+                                          @bind-Field="context.EmergencyContact" />
+
+                        <AntDesign.Column TData="string"
+                                          Title="Emergency Contact"
+                                          @bind-Field="context.EmergencyContact" />
+
+                        @*<AntDesign.Column TData="string" Title="Joining Date">
+                                @context.JoiningDate.ToLocalTime().ToString("dd-MM-yyyy")
+                            </AntDesign.Column>
+                            <AntDesign.Column TData="string" Title="Leaving Date">
+                                @context.LeavingDate?.ToLocalTime().ToString("dd-MM-yyyy")
+                            </AntDesign.Column>
+                            <AntDesign.Column Title="Action" Field="context.Id">
+                                <Dropdown Placement="@PlacementType.BottomCenter">
+                                    <Overlay>
+                                        <Menu>
+                                            <MenuItem OnClick="(() => Edit(context.Id))">
+                                                Edit
+                                            </MenuItem>
+                                            <MenuItem OnClick="(() => ShowDeleteConfirm(context))">
+                                                Delete
+                                            </MenuItem>
+                                        </Menu>
+                                    </Overlay>
+                                    <ChildContent>
+                                        <Button Type="primary">Actions</Button>
+                                    </ChildContent>
+                                </Dropdown>
+                            </AntDesign.Column>*@
+                    </Table>
+                </ChildContent>
+            </Card>
+        </div>
+    </ChildContent>
+</PageContainer>

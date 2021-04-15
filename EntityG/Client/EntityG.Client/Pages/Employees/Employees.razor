@@ -1,0 +1,87 @@
+﻿@page "/employees"
+@namespace EntityG.Client.Pages.Employees
+@using EntityG.Contracts.Responses.Employees
+@using EntityG.Contracts.Responses.Identity
+@using EntityG.Contracts.Responses.Shared
+
+<div>
+    <PageContainer Title="Employees">
+        <Breadcrumb>
+            <Breadcrumb>
+                <BreadcrumbItem>Home</BreadcrumbItem>
+                <BreadcrumbItem>Employees</BreadcrumbItem>
+            </Breadcrumb>
+        </Breadcrumb>
+        <ChildContent>
+            <div class="standardList">
+                <Card Class="listCard"
+                      Title="Manage Employees"
+                      Style="margin-top: 24px;"
+                      BodyStyle="padding: 0 32px 40px 32px">
+                    <Extra>
+                        <div class="extraContent">
+                            <Search Class="extraContentSearch" Placeholder="Search..." @bind-Value="@SearchText" OnSearch="GetAllEmployeesWithPaging" />
+                        </div>
+                    </Extra>
+                    <ChildContent>
+                        <Button Type="primary" OnClick="CreateEmployee">Create</Button>
+                        <br />
+                        <br />
+                        <Table DataSource="@_employees" TItem="EmployeeDto"
+                               Total="@TotalCount"
+                               Loading="@IsLoading"
+                               PageIndex="@Page"
+                               PageSize="@PageSize"
+                               OnPageIndexChange="HandlePageIndexChanged"
+                               OnPageSizeChange="HandlePageSizeChange">
+                            <AntDesign.Column TData="string"
+                                              Title="Code"
+                                              @bind-Field="context.EmployeeIdNumber" />
+                            <AntDesign.Column TData="string"
+                                              Title="First Name"
+                                              @bind-Field="context.FirstName" />
+                            <AntDesign.Column TData="string"
+                                              Title="Last Name"
+                                              @bind-Field="context.LastName" />
+                            <AntDesign.Column TData="string"
+                                              Title="Email"
+                                              @bind-Field="context.Email" />
+                            <AntDesign.Column TData="string"
+                                              Title="Department"
+                                              @bind-Field="context.Department" />
+                            <AntDesign.Column TData="string"
+                                              Title="Phone Number"
+                                              @bind-Field="context.Phone" />
+                            <AntDesign.Column TData="string"
+                                              Title="Address"
+                                              @bind-Field="context.Address1" />
+                            <AntDesign.Column TData="string" Title="Joining Date">
+                                @context.JoiningDate.ToLocalTime().ToString("dd-MM-yyyy")
+                            </AntDesign.Column>
+                            <AntDesign.Column TData="string" Title="Leaving Date">
+                                @context.LeavingDate?.ToLocalTime().ToString("dd-MM-yyyy")
+                            </AntDesign.Column>
+                            <AntDesign.Column Title="Action" Field="context.Id">
+                                <Dropdown Placement="@PlacementType.BottomCenter">
+                                    <Overlay>
+                                        <Menu>
+                                            <MenuItem OnClick="(() => Edit(context.Id))">
+                                                Edit
+                                            </MenuItem>
+                                            <MenuItem OnClick="(() => ShowDeleteConfirm(context))">
+                                                Delete
+                                            </MenuItem>
+                                        </Menu>
+                                    </Overlay>
+                                    <ChildContent>
+                                        <Button Type="primary">Actions</Button>
+                                    </ChildContent>
+                                </Dropdown>
+                            </AntDesign.Column>
+                        </Table>
+                    </ChildContent>
+                </Card>
+            </div>
+        </ChildContent>
+    </PageContainer>
+</div>

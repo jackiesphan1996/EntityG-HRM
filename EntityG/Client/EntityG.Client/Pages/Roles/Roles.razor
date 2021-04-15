@@ -1,0 +1,71 @@
+﻿@page "/identity/roles"
+@namespace EntityG.Client.Pages.Roles
+@using EntityG.Contracts.Responses.Identity
+
+
+<div>
+    <PageContainer Title="Roles">
+        <Breadcrumb>
+            <Breadcrumb>
+                <BreadcrumbItem>Home</BreadcrumbItem>
+                <BreadcrumbItem>Identity</BreadcrumbItem>
+                <BreadcrumbItem>Roles</BreadcrumbItem>
+            </Breadcrumb>
+        </Breadcrumb>
+        <ChildContent>
+            <div class="standardList">
+                <Card Class="listCard"
+                      Title="Manage Roles"
+                      Style="margin-top: 24px;"
+                      BodyStyle="padding: 0 32px 40px 32px">
+                    <Button Type="primary" OnClick="Create">Create</Button>
+                    <br />
+                    <br />
+                    <Table DataSource="@RoleList" TItem="RoleResponse" Loading="@IsLoading">
+                        <AntDesign.Column TData="string" Title="Id" @bind-Field="context.Id" />
+                        <AntDesign.Column TData="string" Title="Name">
+                            @context.Name
+                    </AntDesign.Column>
+                    <ActionColumn Title="Action">
+                        <Dropdown Placement="@PlacementType.BottomCenter">
+                            <Overlay>
+                                <Menu>
+                                    <MenuItem OnClick="(() => ManagePermissions(context.Id))">
+                                        Manage Permissions
+                                    </MenuItem>
+                                    <MenuItem OnClick="(() => Edit(context.Id))">
+                                        Edit
+                                    </MenuItem>
+                                    <MenuItem OnClick="(() => ShowDeleteConfirm(context))">
+                                        Delete
+                                    </MenuItem>
+                                </Menu>
+                            </Overlay>
+                            <ChildContent>
+                                <Button Type="primary">Actions</Button>
+                            </ChildContent>
+                        </Dropdown>
+
+                    </ActionColumn>
+                </Table>
+                <Modal Title="@RoleDiaglogTitle"
+                       Visible="@RoleDiaglogVisiable"
+                       OnOk="@HandleRoleDiaglogOk"
+                       OnCancel="@HandleRoleDiaglogCancel">
+                    <Form @ref="RoleDiaglogForm"
+                          Model="@_role"
+                          LabelColSpan="8"
+                          WrapperColSpan="16">
+                        <FormItem Label="Role Id">
+                            <Input @bind-Value="@context.Id" Disabled />
+                        </FormItem>
+                        <FormItem Label="Role Name">
+                            <Input @bind-Value="@context.Name" />
+                        </FormItem>
+                    </Form>
+                </Modal>
+            </Card>
+        </div>
+    </ChildContent>
+</PageContainer>
+</div>
