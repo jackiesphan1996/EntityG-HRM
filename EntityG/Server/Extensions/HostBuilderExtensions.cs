@@ -18,13 +18,7 @@ namespace EntityG.Server.Extensions
 
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
-                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(configuration["ElasticConfiguration:Uri"]))
-                {
-                    ModifyConnectionSettings = x => x.BasicAuthentication(configuration["ElasticConfiguration:Username"], configuration["ElasticConfiguration:Password"]),
-                    AutoRegisterTemplate = true,
-                    AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
-                    IndexFormat = "entityg.server-{0:yyyy.MM.dd}"
-                }).CreateLogger();
+                .CreateLogger();
 
             SerilogHostBuilderExtensions.UseSerilog(builder);
             return builder;

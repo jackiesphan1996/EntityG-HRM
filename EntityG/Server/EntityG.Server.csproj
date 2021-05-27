@@ -1,5 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
@@ -45,7 +45,6 @@
     <ProjectReference Include="..\..\EntityG.EntityFramework.SqlServer\EntityG.EntityFramework.SqlServer.csproj" />
     <ProjectReference Include="..\..\EntityG.EntityFramework\EntityG.EntityFramework.csproj" />
     <ProjectReference Include="..\Client\EntityG.Client\EntityG.Client.csproj" />
+    <Content Include="Controllers\BaseApiController.cs" />
   </ItemGroup>
-
-
 </Project>
