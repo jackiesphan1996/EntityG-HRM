@@ -9,6 +9,9 @@
     <UserSecretsId>26776deb-4847-4dd6-9711-424786719d43</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="EasyCaching.Core" Version="1.2.0" />
+    <PackageReference Include="EasyCaching.InMemory" Version="1.2.0" />
+    <PackageReference Include="EasyCaching.Serialization.MessagePack" Version="1.2.0" />
     <PackageReference Include="Hangfire" Version="1.7.19" />
     <PackageReference Include="Hangfire.InMemory" Version="0.3.4" />
     <PackageReference Include="Hangfire.PostgreSql" Version="1.8.4" />
@@ -38,6 +41,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\EntityG.BusinessLogic.Caching.Interfaces\EntityG.BusinessLogic.Caching.Interfaces.csproj" />
+    <ProjectReference Include="..\..\EntityG.BusinessLogic.Caching\EntityG.BusinessLogic.Caching.csproj" />
     <ProjectReference Include="..\..\EntityG.BusinessLogic\EntityG.BusinessLogic.csproj" />
     <ProjectReference Include="..\..\EntityG.Contracts\EntityG.Contracts.csproj" />
     <ProjectReference Include="..\..\EntityG.EntityFramework.Configuration\EntityG.EntityFramework.Configuration.csproj" />

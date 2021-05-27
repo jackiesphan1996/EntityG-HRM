@@ -1,13 +1,19 @@
-﻿using EntityG.BusinessLogic.Configurations;
+﻿using EasyCaching.InMemory;
+using EntityG.BusinessLogic.Caching.Interfaces.Proxies;
+using EntityG.BusinessLogic.Caching.Proxies;
+using EntityG.BusinessLogic.Caching.Proxies.Implements;
+using EntityG.BusinessLogic.Caching.Proxies.Interfaces;
+using EntityG.BusinessLogic.Configurations;
+using EntityG.BusinessLogic.Interfaces.Services;
+using EntityG.BusinessLogic.Interfaces.Services.Account;
+using EntityG.BusinessLogic.Interfaces.Services.Identity;
+using EntityG.BusinessLogic.Interfaces.Services.Shared;
 using EntityG.BusinessLogic.Services;
 using EntityG.BusinessLogic.Services.Account;
 using EntityG.BusinessLogic.Services.Identity;
-using EntityG.BusinessLogic.Services.Interfaces;
-using EntityG.BusinessLogic.Services.Interfaces.Account;
-using EntityG.BusinessLogic.Services.Interfaces.Identity;
-using EntityG.BusinessLogic.Services.Interfaces.Shared;
 using EntityG.BusinessLogic.Services.Shared;
 using EntityG.EntityFramework.Configuration.Configuration;
+using EntityG.EntityFramework.Configuration.InMemory;
 using EntityG.EntityFramework.Configuration.MySql;
 using EntityG.EntityFramework.Configuration.PostgreSQL;
 using EntityG.EntityFramework.Contexts;
@@ -38,8 +44,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Security.Claims;
 using System.Text;
-using EntityG.EntityFramework.Configuration.InMemory;
-using EntityG.EntityFramework.Entities;
 
 namespace EntityG.Server.Extensions
 {
@@ -210,6 +214,10 @@ namespace EntityG.Server.Extensions
             services.AddScoped<ITimesheetService, TimesheetService>();
             services.AddScoped<ILeaveService, LeaveService>();
             services.AddScoped<ILeaveTypeService, LeaveTypeService>();
+            services.AddScoped<IAssetTypeProxy, AssetTypeProxy>();
+            services.AddScoped<IEmployeeProxy, EmployeeProxy>();
+            services.AddScoped<IUserProxy, UserProxy>();
+            services.AddScoped<IProjectProxy, ProjectProxy>();
 
             return services;
         }
@@ -283,5 +291,47 @@ namespace EntityG.Server.Extensions
 
             return services;
         }
+        
+        public static IServiceCollection AddEasyCaching(this IServiceCollection services)
+        {
+            services.AddEasyCaching(options =>
+            {
+                options.UseInMemory(config =>
+                {
+                    config.DBConfig = new InMemoryCachingOptions
+                    {
+                         // scan time, default value is 60s
+                         ExpirationScanFrequency = 60,
+                         // total count of cache items, default value is 10000
+                         SizeLimit = 10000
+                    };
+                     // the max random second will be added to cache's expiration, default value is 120
+                     config.MaxRdSecond = 120;
+                     // whether enable logging, default is false
+                     config.EnableLogging = false;
+                     // mutex key's alive time(ms), default is 5000
+                     config.LockMs = 5000;
+                     // when mutex key alive, it will sleep some time, default is 300
+                     config.SleepMs = 300;
+                }, nameof(EntityG));
+
+                // with a default name [mskpack]
+                options.WithMessagePack();
+
+                // with a custom name [myname]
+                options.WithMessagePack("myname");
+
+                // add some serialization settings
+                options.WithMessagePack(x =>
+                {
+                    // If this setting is true, you should custom the resolver by yourself
+                    // If this setting is false, also the default behavior, it will use ContractlessStandardResolver only
+                    x.EnableCustomResolver = true;
+                }, "cus");
+            });
+
+            return services;
+        }
+
     }
 }

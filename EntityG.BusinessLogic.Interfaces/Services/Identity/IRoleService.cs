@@ -4,7 +4,7 @@ using EntityG.Shared.Wrapper;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace EntityG.BusinessLogic.Services.Interfaces.Identity
+namespace EntityG.BusinessLogic.Interfaces.Services.Identity
 {
     public interface IRoleService
     {

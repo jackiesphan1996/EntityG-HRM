@@ -33,6 +33,7 @@ namespace EntityG.Server
             services.AddHangfire(_configuration);
             services.AddControllers();
             services.AddRazorPages();
+            services.AddEasyCaching();
             services.AddApiVersioning(config =>
             {
                 config.DefaultApiVersion = new ApiVersion(1, 0);

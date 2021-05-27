@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace EntityG.BusinessLogic.Services.Interfaces
+namespace EntityG.BusinessLogic.Interfaces.Services
 {
     public interface ITimesheetService
     {

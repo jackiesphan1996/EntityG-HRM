@@ -1,4 +1,5 @@
-﻿using EntityG.BusinessLogic.Services.Interfaces;
+﻿using EntityG.BusinessLogic.Caching.Interfaces.Proxies;
+using EntityG.BusinessLogic.Interfaces.Services;
 using EntityG.Contracts.Requests.Employees;
 using EntityG.Shared.Wrapper;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,12 @@ namespace EntityG.Server.Controllers.v1
     public class EmployeeController : BaseApiController<EmployeeController>
     {
         private readonly IEmployeeService _employeeService;
+        private readonly IEmployeeProxy _employeeProxy;
 
-        public EmployeeController(IEmployeeService employeeService)
+        public EmployeeController(IEmployeeService employeeService, IEmployeeProxy employeeProxy)
         {
             _employeeService = employeeService;
+            _employeeProxy = employeeProxy;
         }
 
         [HttpGet]
@@ -31,7 +34,7 @@ namespace EntityG.Server.Controllers.v1
         {
             Logger.LogInformation($"Calling api - GetAllEmployees Lookup");
 
-            return Ok(await _employeeService.GetAllAsync());
+            return Ok(await _employeeProxy.GetAllAsync());
         }
 
         [HttpPost]

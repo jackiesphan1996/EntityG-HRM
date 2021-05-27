@@ -1,5 +1,5 @@
 ﻿using EntityG.BusinessLogic.Helpers;
-using EntityG.BusinessLogic.Services.Interfaces.Shared;
+using EntityG.BusinessLogic.Interfaces.Services.Shared;
 using EntityG.EntityFramework.Contexts;
 using EntityG.EntityFramework.Entities;
 using EntityG.EntityFramework.Entities.Identity;

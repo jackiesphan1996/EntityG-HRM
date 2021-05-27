@@ -1,6 +1,6 @@
 ﻿using EntityG.BusinessLogic.Exceptions;
+using EntityG.BusinessLogic.Interfaces.Services;
 using EntityG.BusinessLogic.Mappers;
-using EntityG.BusinessLogic.Services.Interfaces;
 using EntityG.Contracts.Requests.Timesheets;
 using EntityG.Contracts.Responses.Timesheets;
 using EntityG.EntityFramework.Entities;

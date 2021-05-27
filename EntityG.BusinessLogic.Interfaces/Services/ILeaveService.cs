@@ -3,7 +3,7 @@ using EntityG.Shared.Wrapper;
 using System;
 using System.Threading.Tasks;
 
-namespace EntityG.BusinessLogic.Services.Interfaces
+namespace EntityG.BusinessLogic.Interfaces.Services
 {
     public interface ILeaveService
     {

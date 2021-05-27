@@ -1,4 +1,4 @@
-﻿using EntityG.BusinessLogic.Services.Interfaces;
+﻿using EntityG.BusinessLogic.Interfaces.Services;
 using EntityG.Contracts.Requests.Timesheets;
 using EntityG.EntityFramework.Entities;
 using EntityG.Shared.Wrapper;

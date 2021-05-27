@@ -1,4 +1,4 @@
-﻿using EntityG.BusinessLogic.Services.Interfaces;
+﻿using EntityG.BusinessLogic.Interfaces.Services;
 using EntityG.EntityFramework.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

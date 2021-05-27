@@ -1,9 +1,8 @@
-﻿
-using EntityG.Contracts.Requests.Identity;
+﻿using EntityG.Contracts.Requests.Identity;
 using EntityG.Shared.Wrapper;
 using System.Threading.Tasks;
 
-namespace EntityG.BusinessLogic.Services.Interfaces.Account
+namespace EntityG.BusinessLogic.Interfaces.Services.Account
 {
     public interface IAccountService
     {

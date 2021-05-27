@@ -1,5 +1,5 @@
-﻿using EntityG.BusinessLogic.Mappers;
-using EntityG.BusinessLogic.Services.Interfaces;
+﻿using EntityG.BusinessLogic.Interfaces.Services;
+using EntityG.BusinessLogic.Mappers;
 using EntityG.Contracts.Responses.Leaves;
 using EntityG.EntityFramework.Entities;
 using EntityG.EntityFramework.Interfaces;

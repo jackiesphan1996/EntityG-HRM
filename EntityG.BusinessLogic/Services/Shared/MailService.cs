@@ -1,4 +1,4 @@
-﻿using EntityG.BusinessLogic.Services.Interfaces.Shared;
+﻿using EntityG.BusinessLogic.Interfaces.Services.Shared;
 using EntityG.Contracts.Requests.Shared;
 using System.Threading.Tasks;
 

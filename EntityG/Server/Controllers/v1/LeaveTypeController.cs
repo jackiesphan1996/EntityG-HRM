@@ -1,4 +1,4 @@
-﻿using EntityG.BusinessLogic.Services.Interfaces;
+﻿using EntityG.BusinessLogic.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using EntityG.BusinessLogic.Exceptions;
-using EntityG.BusinessLogic.Services.Interfaces.Identity;
-using EntityG.BusinessLogic.Services.Interfaces.Shared;
+using EntityG.BusinessLogic.Interfaces.Services.Identity;
+using EntityG.BusinessLogic.Interfaces.Services.Shared;
 using EntityG.Contracts.Requests.Identity;
 using EntityG.Contracts.Requests.Shared;
 using EntityG.Contracts.Responses.Identity;

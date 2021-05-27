@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using EntityG.BusinessLogic.Services.Interfaces;
+using EntityG.BusinessLogic.Caching.Interfaces.Proxies;
+using EntityG.BusinessLogic.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -9,10 +10,12 @@ namespace EntityG.Server.Controllers.v1
     public class ProjectController : BaseApiController<ProjectController>
     {
         private readonly IProjectService _projectService;
+        private readonly IProjectProxy _projectProxy;
 
-        public ProjectController(IProjectService projectService)
+        public ProjectController(IProjectService projectService, IProjectProxy projectProxy)
         {
             _projectService = projectService ?? throw new ArgumentNullException(nameof(projectService));
+            _projectProxy = projectProxy ?? throw new ArgumentNullException(nameof(projectProxy));
         }
 
         [HttpGet]
@@ -29,7 +32,7 @@ namespace EntityG.Server.Controllers.v1
         {
             Logger.LogInformation($"Calling api - GetAllProjects Lookup");
 
-            return Ok(await _projectService.GetAllAsync());
+            return Ok(await _projectProxy.GetAllAsync());
         }
     }
 }

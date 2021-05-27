@@ -1,4 +1,5 @@
-﻿using EntityG.BusinessLogic.Services.Interfaces;
+﻿using EntityG.BusinessLogic.Caching.Proxies.Interfaces;
+using EntityG.BusinessLogic.Interfaces.Services;
 using EntityG.Contracts.Requests.AssetTypes;
 using EntityG.Shared.Wrapper;
 using Microsoft.AspNetCore.Authorization;
@@ -11,17 +12,19 @@ namespace EntityG.Server.Controllers.v1
     public class AssetTypeController : BaseApiController<AssetTypeController>
     {
         private readonly IAssetTypeService _assetTypeService;
+        private readonly IAssetTypeProxy _assetTypeProxy;
 
-        public AssetTypeController(IAssetTypeService assetTypeService)
+        public AssetTypeController(IAssetTypeService assetTypeService, IAssetTypeProxy assetTypeProxy)
         {
             _assetTypeService = assetTypeService ?? throw new ArgumentNullException(nameof(assetTypeService));
+            _assetTypeProxy = assetTypeProxy ?? throw new ArgumentNullException(nameof(assetTypeProxy));
         }
 
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _assetTypeService.GetAllAsync());
+            return Ok(await _assetTypeProxy.GetAllAsync());
         }
 
         [HttpPost]

@@ -1,4 +1,4 @@
-﻿namespace EntityG.BusinessLogic.Services.Interfaces.Shared
+﻿namespace EntityG.BusinessLogic.Interfaces.Services.Shared
 {
     public interface IDatabaseSeeder
     {

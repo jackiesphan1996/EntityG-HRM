@@ -1,6 +1,6 @@
 ﻿using EntityG.BusinessLogic.Exceptions;
+using EntityG.BusinessLogic.Interfaces.Services;
 using EntityG.BusinessLogic.Mappers;
-using EntityG.BusinessLogic.Services.Interfaces;
 using EntityG.Contracts.Requests.AssetTypes;
 using EntityG.Contracts.Responses.AssetTypes;
 using EntityG.EntityFramework.Entities;

@@ -6,7 +6,7 @@ using EntityG.Shared.Wrapper;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace EntityG.BusinessLogic.Services.Interfaces
+namespace EntityG.BusinessLogic.Interfaces.Services
 {
     public interface IEmployeeService
     {

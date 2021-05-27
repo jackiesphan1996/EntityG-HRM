@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. Tests", "6. Tests", "{1C766149-BF32-42CC-8102-75C9613790A0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7. Tests", "7. Tests", "{1C766149-BF32-42CC-8102-75C9613790A0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityG.BusinessLogic.Test", "EntityG.BusinessLogic.Test\EntityG.BusinessLogic.Test.csproj", "{B57EC2EB-589C-43BB-9333-67C3EDFC8881}"
 EndProject
@@ -13,13 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entity.IntegrationTest", "E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Common", "0. Common", "{13879F91-CE73-4C16-A338-EC86DFCC59C9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. BusinessLogic", "2. BusinessLogic", "{991AC393-73CB-46B0-870B-7C2DA81E49DF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. BusinessLogic", "3. BusinessLogic", "{991AC393-73CB-46B0-870B-7C2DA81E49DF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Databases", "3. Databases", "{29346A48-65CA-4213-84B4-30AB2AF44885}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Databases", "4. Databases", "{29346A48-65CA-4213-84B4-30AB2AF44885}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Backends", "4. Backends", "{49647389-5CF6-4F1E-A39B-32962D471B53}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Backends", "5. Backends", "{49647389-5CF6-4F1E-A39B-32962D471B53}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Clients", "5. Clients", "{47B4798C-B102-4B4B-AEC5-B95A2A1B05F2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. Clients", "6. Clients", "{47B4798C-B102-4B4B-AEC5-B95A2A1B05F2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Contracts", "1. Contracts", "{51540638-BD06-4A54-8AE0-1B2EEF84907A}"
 EndProject
@@ -44,6 +44,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityG.Server", "EntityG\Server\EntityG.Server.csproj", "{03B63817-252A-466E-8707-E58BE2FE8091}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityG.Contracts", "EntityG.Contracts\EntityG.Contracts.csproj", "{E665DFD6-A186-4436-BECB-5C947F84AD50}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Caching", "2. Caching", "{A596A450-B3CD-4380-81E2-447E15B61FE6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityG.BusinessLogic.Caching", "EntityG.BusinessLogic.Caching\EntityG.BusinessLogic.Caching.csproj", "{2DBB22B4-4837-4295-82C1-570CDC968B69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityG.BusinessLogic.Caching.Interfaces", "EntityG.BusinessLogic.Caching.Interfaces\EntityG.BusinessLogic.Caching.Interfaces.csproj", "{4DF10808-E160-42CC-A9FB-56EDB9496B95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityG.BusinessLogic.Interfaces", "EntityG.BusinessLogic.Interfaces\EntityG.BusinessLogic.Interfaces.csproj", "{5EBBD172-D75A-48DF-845F-EE17315C0730}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,6 +111,18 @@ Global
 		{E665DFD6-A186-4436-BECB-5C947F84AD50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E665DFD6-A186-4436-BECB-5C947F84AD50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E665DFD6-A186-4436-BECB-5C947F84AD50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DBB22B4-4837-4295-82C1-570CDC968B69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DBB22B4-4837-4295-82C1-570CDC968B69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DBB22B4-4837-4295-82C1-570CDC968B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DBB22B4-4837-4295-82C1-570CDC968B69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DF10808-E160-42CC-A9FB-56EDB9496B95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DF10808-E160-42CC-A9FB-56EDB9496B95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DF10808-E160-42CC-A9FB-56EDB9496B95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DF10808-E160-42CC-A9FB-56EDB9496B95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EBBD172-D75A-48DF-845F-EE17315C0730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EBBD172-D75A-48DF-845F-EE17315C0730}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EBBD172-D75A-48DF-845F-EE17315C0730}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EBBD172-D75A-48DF-845F-EE17315C0730}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,6 +142,9 @@ Global
 		{4ADF3D50-319A-4C36-B868-2BF2D129FA01} = {0860DD38-DD57-424B-AD5D-FF57DC1A5364}
 		{03B63817-252A-466E-8707-E58BE2FE8091} = {49647389-5CF6-4F1E-A39B-32962D471B53}
 		{E665DFD6-A186-4436-BECB-5C947F84AD50} = {51540638-BD06-4A54-8AE0-1B2EEF84907A}
+		{2DBB22B4-4837-4295-82C1-570CDC968B69} = {A596A450-B3CD-4380-81E2-447E15B61FE6}
+		{4DF10808-E160-42CC-A9FB-56EDB9496B95} = {A596A450-B3CD-4380-81E2-447E15B61FE6}
+		{5EBBD172-D75A-48DF-845F-EE17315C0730} = {991AC393-73CB-46B0-870B-7C2DA81E49DF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FAF77A3A-D0ED-41A4-8320-EDC87AC5D2C3}

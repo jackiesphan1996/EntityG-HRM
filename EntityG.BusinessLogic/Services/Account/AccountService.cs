@@ -1,4 +1,4 @@
-﻿using EntityG.BusinessLogic.Services.Interfaces.Account;
+﻿using EntityG.BusinessLogic.Interfaces.Services.Account;
 using EntityG.Contracts.Requests.Identity;
 using EntityG.EntityFramework.Entities.Identity;
 using EntityG.Shared.Wrapper;

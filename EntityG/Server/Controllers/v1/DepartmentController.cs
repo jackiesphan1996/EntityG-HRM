@@ -1,4 +1,4 @@
-﻿using EntityG.BusinessLogic.Services.Interfaces;
+﻿using EntityG.BusinessLogic.Interfaces.Services;
 using EntityG.Contracts.Requests.Department;
 using EntityG.Shared.Wrapper;
 using Microsoft.AspNetCore.Mvc;

@@ -3,9 +3,9 @@ using EntityG.Shared.Wrapper;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace EntityG.BusinessLogic.Services.Interfaces
+namespace EntityG.BusinessLogic.Caching.Interfaces.Proxies
 {
-    public interface ILeaveTypeService
+    public interface IProjectProxy
     {
         Task<IResult<List<LookupDto>>> GetAllAsync();
     }

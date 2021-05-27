@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using EntityG.BusinessLogic.Helpers;
-using EntityG.BusinessLogic.Services.Interfaces.Identity;
+using EntityG.BusinessLogic.Interfaces.Services.Identity;
 using EntityG.Contracts.Requests.Identity;
 using EntityG.Contracts.Responses.Identity;
 using EntityG.EntityFramework.Contexts;
